@@ -20,12 +20,13 @@ namespace Sitecore.Support.Analytics.Media
         return false;
       }
       MediaRequestTrackingInformation information = new MediaRequestTrackingInformation(request);
-      if (information.IsTrackedRequest())
-      {
-        return true;
-      }
-      ContactKeyCookie cookie = new ContactKeyCookie("");
-      return !cookie.IsClassificationGuessed;
+
+      #region modified
+      // Disabled cookies checking to prevent activates TrackingSessionHandler each time when several media requests are fired simultaneously
+      return information.IsTrackedRequest();
+
+      #endregion
+
     }
 
 
